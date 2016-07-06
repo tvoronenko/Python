@@ -6,13 +6,13 @@ Assume the char array has 2 spaces at the end for every one space in the body, s
 def replaceSpace(string, true_length):
     newstr = list(string)
     space_count = 0
-    for i in range(0,true_length):
+    for i in range(0,true_length-1):
         if string[i] == ' ':
             space_count +=1
             
     index = true_length + space_count * 2
-    if true_length < len(string):
-        newstr[true_length] = '\0' # end array
+#     if true_length < len(string):
+#         newstr[true_length] = '\0' # end array
     i = true_length - 1
     while i >= 0:
         if string[i] == ' ':
