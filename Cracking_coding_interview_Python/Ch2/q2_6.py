@@ -51,6 +51,7 @@ def is_palindromeis_iter(node):
             slow = slow.next
     return True
 
+
 L1 = randomLinkedList(3, 3, 4)
 print(L1)
 print(is_palindrome(L1.first))
