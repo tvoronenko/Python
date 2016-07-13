@@ -8,13 +8,14 @@ and estimate complexity for solution
 #O(n(n+n))
 def find_sum_of_pair(array_int, sum):
     result = {}
+    set_int = set(array_int)
     if array_int == None:
         return
     if len(array_int) < 2:
         return
     for value in array_int:
         target = sum - value
-        if (target in array_int) and (target not in result.keys()):
+        if (target in set_int) and (target not in result):
             result[value] = target
     
     if len(result) == 0:
@@ -45,5 +46,5 @@ def find_sum_of_pair1(array_int, sum):
 
 array_int_duplic = [2, 4, 8, 5, 6, -2, 4, 7, 0, 9]
 array_int = [9, 7, 3, 5, 4, 8, 2 ]
-print(find_sum_of_pair3(array_int_duplic, 7))
-print(find_sum_of_pair3(array_int, 7))
+print(find_sum_of_pair(array_int_duplic, 7))
+print(find_sum_of_pair(array_int, 7))
