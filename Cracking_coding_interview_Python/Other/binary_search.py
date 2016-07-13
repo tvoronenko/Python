@@ -13,3 +13,5 @@ def _search(key, a, lo, hi):
 def search(key, a):
     return _search(key, a, 0, len(a))
 
+array_int = [5, 4, 0, 19, 3, 4, 2, 0]
+print(search(0, array_int))

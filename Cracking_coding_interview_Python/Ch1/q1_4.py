@@ -2,15 +2,6 @@
 
 @author: solnc
 '''
-def get_char_number(c):
-
-    a = ord("A")
-    z = ord("z")
-    val = ord(c)
-    if (a <= val) and (val <= z):
-        return val - a
-    
-    return -1
 
 def check_max_one_odd(table_frequency):
     found_odd = False
