@@ -1,6 +1,7 @@
 '''
-
-@author: solnc
+Given a string, write a fucntion to check if it is a permutation of palindrome. A palindrome is a word or phrase
+that is the same forwards and backwards. A permutatuion is rearrangement of letters. The palindrome does not
+ need to be limited to just dictionary words
 '''
 
 def check_max_one_odd(table_frequency):
