@@ -29,8 +29,6 @@ def check_one_away_edit(s_original, s_modifyed):
         else:
             s2 = s_original
             s1 = s_modifyed
-        
-        found_diff = False
         while (index1 < len(s1) and index2 < len(s2)):
             if(s1[index1] != s2[index2]):
                 if (index1!= index2):
