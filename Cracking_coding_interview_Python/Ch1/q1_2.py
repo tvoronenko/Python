@@ -17,10 +17,6 @@ def is_permutation(first_string, second_string):
     first_string_sorted = ''.join(sorted(first_string))
     second_string_sorted = ''.join(sorted(second_string))
 
-#     for i in range(0, len(first_string_sorted)):
-#         if first_string_sorted[i] != second_string_sorted[i]:
-#             return False
-
     return first_string_sorted==second_string_sorted
 
 def is_permutation_2(first_string, second_string):
@@ -35,12 +31,6 @@ def is_permutation_2(first_string, second_string):
         return False
 
     character_dict = {c:first_string.count(c) for c in first_string}
-    
-#     for character in first_string:
-#         if character in character_dict:
-#             character_dict[character] = character_dict[character] + 1
-#         else:
-#             character_dict[character] = 1
 
     for character in second_string:
         if character in character_dict:
