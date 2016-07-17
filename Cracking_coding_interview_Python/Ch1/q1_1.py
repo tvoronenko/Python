@@ -12,7 +12,7 @@ def unique_characters(my_string):
         if character in character_count:
             return False
         else:
-            character_count[character] = 1
+            character_count[character] = True
 
     return True
 
@@ -23,7 +23,7 @@ def unique_characters_no_ds(my_string):
     """
     checker = 0
     for character in my_string:
-        char_code = ord(character) - ord('a')
+        char_code = ord(character) - ord('A')
         one_left_shift = 1 << char_code
         if checker & one_left_shift > 0:
             return False
@@ -34,6 +34,11 @@ def unique_characters_no_ds(my_string):
 if __name__ == '__main__':
     if unique_characters("dane"):
         print("The characters are unique")
+    if not unique_characters("daned"):
+        print("The characters are not unique")
 
     if unique_characters_no_ds("dane"):
-        print("The characters are unique")
+        print("The characters are unique")    
+    if not unique_characters_no_ds("daned"):
+        print("The characters are not unique")
+    

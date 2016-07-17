@@ -17,11 +17,11 @@ def is_permutation(first_string, second_string):
     first_string_sorted = ''.join(sorted(first_string))
     second_string_sorted = ''.join(sorted(second_string))
 
-    for i in range(0, len(first_string_sorted)):
-        if first_string_sorted[i] != second_string_sorted[i]:
-            return False
+#     for i in range(0, len(first_string_sorted)):
+#         if first_string_sorted[i] != second_string_sorted[i]:
+#             return False
 
-    return True
+    return first_string_sorted==second_string_sorted
 
 def is_permutation_2(first_string, second_string):
     """
