@@ -5,10 +5,10 @@ a rotation of s1 using only one call to isSubstring (e.g.,"waterbottle" is a rot
 '''
 def isSubstring(s1,s2):
     return s1.find(s2) > -1
-
+#xy = s1 and yx = s2
+# s1s1 = xyxy, so xs2y, so s2 is always substring s1s1
 def is_rotate(s1,s2):
-    l = len(s1)
-    if l > 0 and l == len(s2):
+    if len(s1) > 0 and len(s1) == len(s2):
         return isSubstring(s1*2,s2)
         
 s1 = 'waterbottle'
