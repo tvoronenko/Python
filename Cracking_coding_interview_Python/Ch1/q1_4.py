@@ -7,6 +7,7 @@ that is the same forwards and backwards. A permutatuion is rearrangement of lett
 def check_max_one_odd(table_frequency):
     found_odd = False
     for count in table_frequency:
+        #if char appears 1 or 3 or etc times
         if count % 2 == 1:
             if found_odd:
                 return False
