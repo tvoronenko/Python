@@ -77,5 +77,6 @@ L2.addNode(4)
 
 print("First list: " + str(L1))
 print("Second list: " + str(L2))
-
-print("Intersection is " + find_intersection(L1.first,L2.first).print_list())
+result = find_intersection(L1.first,L2.first)
+result = result.print_list() if result != None else "None"
+print("Intersection is " + result)
