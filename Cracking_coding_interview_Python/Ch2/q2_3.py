@@ -3,7 +3,7 @@ Implement an algorithm to delete a node in the middle of a singly linked list,
 given only access to that node
 """
 import random
-from LinkedList import *
+from Other.Data_Structure.LinkedList import *
 
 
 def delete_middle(linked_list_node):

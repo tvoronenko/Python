@@ -3,7 +3,7 @@ Write code to partition a linked list around a value x, such that all nodes
 less than x come before all nodes greater than or equal to x
 """
 import random
-from LinkedList import *
+from Other.Data_Structure.LinkedList import *
 #Pass in the head of the linked list and the value to partition around
 def partition(linked_list_node, x):
     before_start = None

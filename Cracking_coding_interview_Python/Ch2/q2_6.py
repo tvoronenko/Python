@@ -3,9 +3,7 @@ Implement a function to check if a linked list is a palindrome
 """
 
 import random
-from LinkedList import LinkedListNode
-from LinkedList import randomLinkedList
-from LinkedList import  LinkedList
+from Other.Data_Structure.LinkedList import *
 import sys
 
 def reverse_and_clone(node):

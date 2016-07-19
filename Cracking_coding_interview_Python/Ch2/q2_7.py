@@ -10,7 +10,7 @@ Notes:
 * The linked lists must retain their original structure after the function returns
 * You may assume there are no cycles anywhere in the entire linked structure
 """
-from LinkedList import *
+from Other.Data_Structure.LinkedList import *
 class Result:
         def __init__(self, tail, size):
             self.tail = tail

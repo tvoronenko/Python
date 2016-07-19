@@ -2,7 +2,7 @@
 Given a circular linked list, implement an algorithm which returns the node
 at the beginning of the loop
 """
-from LinkedList import *
+from Other.Data_Structure.LinkedList import *
 
 def find_begining(head):
     slow = head

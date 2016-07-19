@@ -4,7 +4,8 @@ Write code to remove duplicates from an unsorted linked list
 How would you solve this problem if a temporary buffer is not allowed?
 """
 import random
-from LinkedList import *
+from Other.Data_Structure.LinkedList import *
+
 
 def delete_duplicates(linked_list_node):
     """

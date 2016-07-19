@@ -1,4 +1,4 @@
-from LinkedList import *
+from Other.Data_Structure.LinkedList import *
 """
 You have two numbers represented by a linked list, where each node contains
 a single digit. The digits are stored in reverse order, such that the 1's
