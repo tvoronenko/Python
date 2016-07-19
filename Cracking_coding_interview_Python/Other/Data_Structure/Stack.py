@@ -9,13 +9,13 @@ class Stack:
         self.items.append(item)
 
     def pop(self):
-        if self.is_empty():
+        if self.isEmpty():
             raise StackEmptyException
         else:
             return self.items.pop()
 
     def peek(self):
-        if self.is_empty():
+        if self.isEmpty():
             raise StackEmptyException
         else:
             return self.items[-1]
