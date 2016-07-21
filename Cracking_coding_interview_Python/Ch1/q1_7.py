@@ -3,7 +3,7 @@ Given an image represented by NxN matrix, where each pixel in the image is 4 byt
 the image by 90 degrees. Can you do this in place?
 '''
 import math
-
+from copy import deepcopy
 def rotate_matrix_cw90(matrix):
     if (len(matrix) == 0) or (len(matrix) != len(matrix[0])):
         return
@@ -23,9 +23,16 @@ def rotate_matrix_cw90(matrix):
             matrix[last][last - offset] = matrix[i][last]
             #top -> right
             matrix[i][last] = top
-
+#not in-place
+def rotate_matrix_with_deepcopy(matrix,n):
+    res = deepcopy(matrix)
+    for x in range(0,n):
+        for y in range(n-1, -1, -1):
+            res[x][n-y-1] = matrix[y][x]
+    return res
             
 matrix= [[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4]]
-print(matrix)
+print(str(matrix))
+print(rotate_matrix_with_deepcopy(matrix,4))
 rotate_matrix_cw90(matrix)
-#print(matrix)
+print(matrix)

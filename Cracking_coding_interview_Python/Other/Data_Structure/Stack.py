@@ -1,6 +1,7 @@
 class Stack:
-    def __init__(self):
+    def __init__(self, capacity = 1000):
         self.items = []
+        self.capacity = capacity
 
     def isEmpty(self):
         return self.items == []
