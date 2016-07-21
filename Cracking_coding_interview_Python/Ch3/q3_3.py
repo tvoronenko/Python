@@ -12,36 +12,44 @@ substack.
 '''
 from Other.Data_Structure.Stack import *
 class SetOfStacks:
-    def __init__(self):
+    def __init__(self,capacity):
         self.contents = []
+        self.capacity = capacity
         
     def push(self, item):
-        try:
-            last_stack = self.contents[-1]
-        except IndexError:
-            # there is nothing in the set of stacks
-            last_stack = Stack(5)
-            self.contents.append(last_stack)
-        
-        if len(last_stack.contents) == last_stack.capacity:
-            new_stack = Stack(5)
-            new_stack.push(item)
-            self.contents.append(new_stack)
-        else:
-            last_stack.push(item)
+        if (len(self.contents) == 0) or (len(self.contents[-1]) == self.capacity):
+            self.contents.append([])  
+        self.contents[-1].append(item)  
     
     def pop(self):
-        try:
-            last_stack = self.contents[-1]
-        except IndexError:
-            # there is nothing in the set of stacks
+        if len(self.contents) == 0:
             return None
-        
-        popped = last_stack.pop()
-        if len(last_stack.contents) == 0:
+        data = self.contents[-1].pop()
+        if len(self.contents[-1]) == 0:
             self.contents.pop()
-        
-        return popped
+        return data
             
     def __repr__(self):
         return str(self.contents)
+    # Pop operation on a specifit sub-stack. (Index begins with 1)
+    # Not "rolling over" version. OK with some stacks not at full capacity
+    def popAt(self, index):
+        if index < 1 or index > len(self.contents) or len(self.contents[index-1]) == 0:
+            return None
+        else:
+            return self.contents[index-1].pop() 
+
+s = SetOfStacks(3)  
+l=[1,2,3,4,5,6,7,8]  
+
+for e in l:  
+    s.push(e)  
+print(s)  
+s.popAt(0)  
+print(s)  
+s.popAt(1)  
+print(s)  
+s.pop()  
+print(s)  
+s.pop()  
+print(s)  
