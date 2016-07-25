@@ -3,23 +3,26 @@ Implement an algorithm to determine if an algorithm contains all unique
 characters? What if you cannot use any additional data structures?
 - In Java, you can use a boolean array of length 128 (for ascii)
 """
+#using a hash table (here as a dictionary of key/values)
 def unique_characters(my_string):
     if my_string == "":
         return True
 
     character_count = {}
     for character in my_string:
+        #checking if char is in the dict is O(1). In practice however, this is expected to perform worse than using lists for small numbers of n.
         if character in character_count:
             return False
         else:
             character_count[character] = True
-
     return True
 
 def unique_characters_no_ds(my_string):
     """
     Implementing a solution to this problem without an additional data structure
-    requires using bit manipulation
+    requires using bit manipulation:
+    using a bit vector
+    here as assumption in book, assume string only use 
     """
     checker = 0
     for character in my_string:
@@ -31,6 +34,15 @@ def unique_characters_no_ds(my_string):
         checker = checker | one_left_shift
 
     return True
+def no_duplicates_no_structures(str_):
+    """ Now without using additional data structures """
+
+    for letter in str_:
+        if str_.count(letter) > 1:
+            return False
+    else:
+        return True
+    
 if __name__ == '__main__':
     if unique_characters("dane"):
         print("The characters are unique")

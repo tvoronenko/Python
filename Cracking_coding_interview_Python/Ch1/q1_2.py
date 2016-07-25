@@ -3,6 +3,7 @@ Given two strings, write a function to determine if one is a permutation
 of the other
 Considerations: is comparison case sensitive? Is whitespace significant?
 """
+# big O complexity depends on python list sort complexity, which should be better than O(n^2)
 def is_permutation(first_string, second_string):
     """
     The strings cannot be permutations of one another if they are not of the
@@ -12,13 +13,10 @@ def is_permutation(first_string, second_string):
     length_of_second = len(second_string)
     if length_of_first != length_of_second:
         return False
-
     # sort both strings and compare them
-    first_string_sorted = ''.join(sorted(first_string))
-    second_string_sorted = ''.join(sorted(second_string))
+    return sorted(first_string)==sorted(second_string)
 
-    return first_string_sorted==second_string_sorted
-
+#O(n)
 def is_permutation_2(first_string, second_string):
     """
     Another way to approach this problem is to keep track of character
