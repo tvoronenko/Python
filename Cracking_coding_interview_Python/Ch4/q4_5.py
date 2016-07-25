@@ -37,7 +37,8 @@ def valid_bsearch_tree(root, lbound = -float("inf"), rbound = float("inf")):
     return (lbound <= root.value < rbound) and \
         valid_bsearch_tree(root.left, lbound, root.value) and \
         valid_bsearch_tree(root.right, root.value, rbound)
-        
+#time O(N)
+#space O(log N)        
 def checkBST2(root,mini = None,maxi = None):
     if root == None:
         return True
