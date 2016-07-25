@@ -1,7 +1,8 @@
 """
-Given two strings, write a function to determine if one is a permutation
-of the other
-Considerations: is comparison case sensitive? Is whitespace significant?
+Given two strings, write a function to determine if one is a 
+permutation of the other
+Considerations: is comparison case sensitive? Is whitespace 
+significant?
 """
 # big O complexity depends on python list sort complexity, which should be better than O(n^2)
 def is_permutation(first_string, second_string):
