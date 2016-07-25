@@ -33,18 +33,22 @@ def replace_space1(string):
         char_list.append(char)
     return ''.join(char_list)
 
-#test
-input_str = "Mr Jonh Smith    "
-input_str = list(input_str)
-expectOutput = "Mr%20Jonh%20Smith"
-if replace_space(input_str, 13) == expectOutput:
-    print("test passed")
-else:
-    print("test failed")
-    print(replace_space(input_str, 13))
-input_str = "Mr Jonh Smith    "
-if replace_space1(input_str) == expectOutput:
-    print("test passed")
-else:
-    print("test failed")
-    print(replace_space1(input_str))
+def main():
+    """test"""
+    input_string = "Mr Jonh Smith    "
+    converted_lit_from_string = list(input_string)
+    expect_output = "Mr%20Jonh%20Smith"
+    if replace_space(converted_lit_from_string, 13) == expect_output:
+        print("test passed")
+    else:
+        print("test failed")
+        print(replace_space(converted_lit_from_string, 13))
+    if replace_space1(input_string) == expect_output:
+        print("test passed")
+    else:
+        print("test failed")
+        print(replace_space1(input_string))
+
+if __name__ == '__main__':
+    main()
+    
