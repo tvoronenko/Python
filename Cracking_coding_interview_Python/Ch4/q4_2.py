@@ -5,6 +5,10 @@ an algorithm to create a binary search tree with minimal height.
 from Other.Data_Structure.Tree import *
 
 def create_minimal_BST(array, start, end):
+    if len(array) == 0:
+        return None
+    if len(array) == 1:
+        return BinaryTree(array[0])
     if start > end :
         return None
     mid = int((start + end) / 2)
