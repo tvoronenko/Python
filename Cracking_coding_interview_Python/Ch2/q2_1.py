@@ -3,9 +3,7 @@
 Write code to remove duplicates from an unsorted linked list
 How would you solve this problem if a temporary buffer is not allowed?
 """
-import random
-from Other.Data_Structure.LinkedList import *
-
+from Other.Data_Structure.LinkedList import randomLinkedList
 
 def delete_duplicates(linked_list_node):
     """
@@ -15,7 +13,7 @@ def delete_duplicates(linked_list_node):
     """
     if not linked_list_node:
         return
-    current_node = linked_list_node 
+    current_node = linked_list_node
     previous = None
     set_founded = {}
     while current_node != None:
@@ -24,9 +22,7 @@ def delete_duplicates(linked_list_node):
         else:
             set_founded[current_node.value] = 1
             previous = current_node
-        
-        current_node = current_node.next 
-    
+        current_node = current_node.next
     return linked_list_node
 
 def delete_dupl_no_buffer(linked_list_node):
@@ -51,11 +47,14 @@ def delete_dupl_no_buffer(linked_list_node):
                 runner_node.next = runner_node.next.next
             else:
                 runner_node = runner_node.next
-
         current_node = current_node.next
-     
-L1 = randomLinkedList(9, 3, 7)
-print(L1)
-delete_dupl_no_buffer(L1.first)
-print(L1)
-        
+
+def main():
+    """test"""
+    list1 = randomLinkedList(9, 3, 7)
+    print(list1)
+    delete_dupl_no_buffer(list1.first)
+    print(list1)
+
+if __name__ == '__main__':
+    main()
