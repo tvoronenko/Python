@@ -13,7 +13,7 @@ f,e,a,b,d,c
 '''
 
 def find_build_order(projects, dependencies):
-    graph = Graph (projects, dependencies)
+    graph = build_graph(projects, dependencies)
     return order_projects(graph.get_nodes())
     
 def order_projects(projects):
@@ -21,7 +21,7 @@ def order_projects(projects):
     for project in projects:
         if project.get_state() == State.BLANK:
             if not do_dfs(project, stack):
-                return null
+                return None
     return stack
     
 def do_dfs(project, stack):
@@ -43,55 +43,55 @@ def build_graph(projects, dependencies):
     indicates that b depends on a and a must be built before b."""
     graph = Graph()
     for project in projects:
-        graph.create_node(project)
+        graph.get_or_create_node(project)
     for dependency in dependencies:
         first = dependency[0]
         second  = dependency[1]
         graph.add_edge(first, second)
     return graph
 
-class Graph(Object):
-  def __init__(self):
-      self.nodes = []
-      self.map_graph = {}
- 
-  def get_or_create_node(self, name):
-      if name not in self.map_graph.keys():
-          node = Project(name)
-          self.nodes.append(node)
-          self.map_graph[name] = node
-      return self.map_graph[name]
+class Graph():
+    def __init__(self):
+        self.nodes = []
+        self.map_graph = {}
 
-  def add_edge(self, start_name, end_name):
-      start = self.get_or_create_node(start_name)
-      end = self.get_or_create_node(end_name)
-      start.add_neighbor(end)
-  
-  def get_nodes(self):
-      return self.nodes
-  
+    def get_or_create_node(self, name):
+        if name not in self.map_graph.keys():
+            node = Project(name)
+            self.nodes.append(node)
+            self.map_graph[name] = node
+        return self.map_graph[name]
+
+    def add_edge(self, start_name, end_name):
+        start = self.get_or_create_node(start_name)
+        end = self.get_or_create_node(end_name)
+        start.add_neighbor(end)
+
+    def get_nodes(self):
+        return self.nodes
+
 from enum import Enum
 class State(Enum):
-...     COMPLETE = 1
-...     PARTIAL = 2
-...     BLANK = 3
+    COMPLETE = 1
+    PARTIAL = 2
+    BLANK = 3
 
-class Project(Object):
-    """Essentially equvalent to earlier solution, with state info added and
+class Project():
+    """Essentially equivalent to earlier solution, with state info added and
     dependency count removed"""
     def __init__(self, name, dependencies = 0, children = [], map_pr = {}):
         self.state = State.BLANK
         self.name = name
-        self.children = children
-        self.map_pr = map_pr
-        self.dependencies = dependencies
-  
+        self.children = []
+        self.map_pr = {}
+        self.dependencies = 0
+
     def add_neighbor(self, node):
         if node.get_name() not in self.map_pr:
             self.children.append(node)
             self.map_pr[node.get_name()] = node
             node.increment_dependecies()
-    
+
     def increment_dependecies(self):
         self.dependencies += 1
 
@@ -99,16 +99,28 @@ class Project(Object):
         self.dependencies -= 1
 
     def get_name(self):
-        return sef.name
-  
+        return self.name
+
     def get_children(self):
         return self.children
-        
+
     def get_number_dependencies(self):
         return self.dependencies
-    
-    def get_state():
+
+    def get_state(self):
         return self.state
     
-    def set_state(state):
+    def set_state(self,state):
         self.state = state
+
+    def __str__(self):
+        print("name: {}".format(self.name)) 
+
+def main():
+    """test"""
+    build_order_list = find_build_order(['a', 'b', 'c', 'd', 'e', 'f'], [['a', 'd'], ['f', 'b'], ['b', 'd'],[ 'f', 'a'], ['d', 'c']])
+    for project in build_order_list:
+        print("name: {}".format(project.name))
+
+if __name__ == '__main__':
+    main()
