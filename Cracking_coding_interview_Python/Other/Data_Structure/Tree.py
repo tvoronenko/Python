@@ -6,6 +6,15 @@ class TreeNode:
     
     def __str__(self):
         return str(self.value)
+    
+    def display_tree(self, level = 0):
+        if self == None: return
+        level += 1
+        if self.right != None:
+            self.right.display_tree(level)
+        print('  ' * (level-1) + str(self.value))
+        if self.left != None:
+            self.left.display_tree(level)
 
 class BinarySearchTree:
     def __init__(self, root):

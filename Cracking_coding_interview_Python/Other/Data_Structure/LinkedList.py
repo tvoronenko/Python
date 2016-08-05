@@ -7,6 +7,12 @@ class LinkedListNode:
         
     def __str__(self):
         return str(self.value)
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self == None:
+            raise StopIteration
+        return self.next
     
     def print_list(self):
         node_str = ""
@@ -20,11 +26,22 @@ class LinkedListNode:
             current_node = current_node.next
 
         return node_str
+    
 class LinkedList:
     def __init__(self):
         self.first = None
         self.size = 0
+        self.index = self.size
         
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index = self.index - 1
+        self.first = self.first.next
+        return self.first
     def addNode(self, value):
         self.size = self.size + 1
         if self.first == None:
