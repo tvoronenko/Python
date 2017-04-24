@@ -79,11 +79,13 @@ class Tree:
                 return None
             if key < current.i_data:
                 if not current.left_child:
+                    new_node.parent = current
                     current.left_child = new_node
                 else:
                     return self.insert_rec(key,value,current.left_child)
             elif current.i_data < key:
                 if not current.right_child:
+                    new_node.parent = current
                     current.right_child = new_node
                 else:
                     return self.insert_rec(key,value,current.right_child)
@@ -108,17 +110,18 @@ class Tree:
         elif del_node.right_child == None: #node has one left child or none child - replace by its child or none
             self.transplant(del_node,del_node.left_child)
         #node has both child - replace by successor(ith this case min from right child)
-        else min =  #node has both child - replace by successor
+        else: #node has both child - replace by successor
             min =  self.find_tree_min(del_node.right_child)
-                if min !=del_node.right_child :
-                    self.transplant(min,min.right_child) # place right child of successor instead of successor,
-                    min.right_child = del_node.right_child
-                    min.right_child.parent = min
-                self.transplant(min,del_node)
-                min.left_child = del_node.left_child
-                min.left_child.parent = min
+            print min.i_data
+            if min !=del_node.right_child:
+                self.transplant(min,min.right_child) # place right child of successor instead of successor,
+                min.right_child = del_node.right_child
+                min.right_child.parent = min
+            self.transplant(del_node,min)
+            min.left_child = del_node.left_child
+            min.left_child.parent = min
         return del_node
-           
+
     """Transplant nodes""" 
     def transplant(self, to_node, from_node):
         if to_node.parent == None:
@@ -137,7 +140,7 @@ class Tree:
         successor = current.parent
         if successor.left == current: 
             return successor
-        else
+        else:
             return None #no successor
             
         
@@ -181,12 +184,17 @@ class Tree:
 
 root = Node(4,1)
 tree = Tree(root)
-root.left_child = Node(2,2,Node(1,3),Node(3,4))
-root.right_child = Node(5,5)
-
+tree.insert(2,2)
+tree.insert(1,2)
+tree.insert(3,4)
 root.display()
-print tree.find(1)
-print tree.find_rec(1,tree.root)
-tree.insert_rec(10,10,tree.root)
-tree.insert_rec(8,10,tree.root)
-
+tree.insert(10,10)
+tree.insert(8,10)
+tree.insert(9,9)
+tree.insert(6,6)
+tree.insert(14,6)
+tree.insert(12,6)
+tree.insert(13,6)
+tree.display()
+tree.delete(12)
+tree.display()
