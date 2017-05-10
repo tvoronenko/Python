@@ -1,86 +1,86 @@
-
-# coding: utf-8
-
-# In[27]:
-
 # Merges two subarrays of arr[].
 # First subarray is arr[l..m]
 # Second subarray is arr[m+1..r]
-def merge(arr, l, m, r):
-    n1 = m - l + 1
-    n2 = r- m
- 
-    # create temp arrays
-    L = [0] * (n1)
-    R = [0] * (n2)
- 
-    # Copy data to temp arrays L[] and R[]
-    for i in range(0 , n1):
-        L[i] = arr[l + i]
- 
-    for j in range(0 , n2):
-        R[j] = arr[m + 1 + j]
- 
-    # Merge the temp arrays back into arr[l..r]
-    i = 0     # Initial index of first subarray
-    j = 0     # Initial index of second subarray
-    k = l     # Initial index of merged subarray
- 
-    while i < n1 and j < n2 :
-        if L[i] <= R[j]:
-            arr[k] = L[i]
-            i += 1
+
+def merge_sort_inplace(arr):
+    n= len(arr)
+    _sorting_inplace(arr,0,n)
+  
+  
+def _sorting_inplace(arr,low, high):
+    if (high-low) >1:
+        middle = low + (high - low)//2
+        _sorting_inplace(arr,low, middle)
+        _sorting_inplace(arr,middle, high)
+        
+        _merge_inplace(arr,low, middle,high)
+        
+def merge_sort(arr):
+    n= len(arr)
+    aux = [0 for x in range(n)]
+    _sorting(arr,0,n,aux)
+
+def _sorting(arr,low, high, aux):
+    if (high-low) >1:
+        middle = low + (high - low)//2
+        _sorting(arr,low, middle, aux)
+        _sorting(arr,middle, high, aux)
+        
+        _merge(arr,low, middle,high,aux)
+        
+def _merge(arr,low, middle,high,aux):
+    n=high-low
+    i=low
+    j=middle
+    for k in range(n):
+        if i==middle:
+            aux[k] = arr[j]
+            j+=1
+        elif j==high:
+            aux[k] = arr[i]
+            i+=1
+        elif arr[i]<arr[j]:
+            aux[k] = arr[i]
+            i+=1
         else:
-            arr[k] = R[j]
-            j += 1
-        k += 1
- 
-    # Copy the remaining elements of L[], if there
-    # are any
-    while i < n1:
-        arr[k] = L[i]
-        i += 1
-        k += 1
- 
-    # Copy the remaining elements of R[], if there
-    # are any
-    while j < n2:
-        arr[k] = R[j]
-        j += 1
-        k += 1
- 
-# l is for left index and r is right index of the
-# sub-array of arr to be sorted
-def mergeSort(arr,l,r):
-    if l < r:
- 
-        # Same as (l+r)/2, but avoids overflow for
-        # large l and h
-        m = (l+(r-1))/2
- 
-        # Sort first and second halves
-        mergeSort(arr, l, m)
-        mergeSort(arr, m+1, r)
-        merge(arr, l, m, r)
+            aux[k] = arr[j]
+            j+=1
+            
+    arr[low:high]=aux[0:n]
 
-
-# In[28]:
-
+def _merge_inplace(arr,low, middle,high):
+    n=high-low
+    i=low
+    j=middle
+    left_el = arr[i]
+    right_el = arr[j]
+    for k in range(n):
+        if i==middle:
+            arr[low+k] = right_el
+            j+=1
+            #check for overflow
+            if j <len(arr):
+                right_el = arr[j]
+        elif j==high:
+            arr[low+k] = left_el
+            i+=1
+            left_el = arr[i]
+        elif left_el<right_el:
+            temp=arr[low+k]
+            arr[low+k] = left_el
+            i+=1
+            if i==(k+low):
+                left_el = temp
+            else:
+                left_el = arr[i]
+        else:
+            arr[low+k] = right_el
+            j+=1
+            #check for overflow
+            if j <len(arr):
+                right_el = arr[j]
+    
 arr = [11,2,5,4,7,6,8,1,23]
-merge_sort(arr)
-
-
-# In[29]:
-
-arr
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
+merge_sort_inplace(arr)
+print arr
 

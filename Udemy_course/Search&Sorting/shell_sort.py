@@ -1,49 +1,19 @@
-
-# coding: utf-8
-
-# In[3]:
-
 def shell_sort(arr):
-    # Start with a big gap, then reduce the gap
-    n = len(arr)
-    gap = n/2
- 
-    # Do a gapped insertion sort for this gap size.
-    # The first gap elements a[0..gap-1] are already in gapped 
-    # order keep adding one more element until the entire array
-    # is gap sorted
-    while gap > 0:
- 
-        for i in range(gap,n):
- 
-            # add a[i] to the elements that have been gap sorted
-            # save a[i] in temp and make a hole at position i
-            temp = arr[i]
- 
-            # shift earlier gap-sorted elements up until the correct
-            # location for a[i] is found
-            j = i
-            while  j >= gap and arr[j-gap] >temp:
-                arr[j] = arr[j-gap]
-                j -= gap
- 
-            # put temp (the original a[i]) in its correct location
-            arr[j] = temp
-        gap /= 2
-
-
-# In[4]:
+    #a small modification on insertion sort
+    len_arr = len(arr)
+    h = 1;
+    while (h < len_arr/3):
+        h = 3*h + 1
+    while h>=1:
+        for i in range(h,len_arr):
+        #Insert a[i] among a[i-h], a[i-2*h], a[i-3*h]..
+            j=i
+            while j>=h and arr[j]<arr[j-h]:
+                #make exchange while i is on proper place 
+                arr[j],arr[j-h] = arr[j-h], arr[j]
+                j-=h
+        h=h/3
+    return arr 
 
 arr = [45,67,23,45,21,24,7,2,6,4,90]
 shell_sort(arr)
-
-
-# In[5]:
-
-arr
-
-
-# In[ ]:
-
-
-
