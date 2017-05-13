@@ -1,25 +1,25 @@
+from random import  randint
 # This function takes last element as pivot, places
 # the pivot element at its correct position in sorted
 # array, and places all smaller (smaller than pivot)
 # to left of pivot and all greater elements to right
 # of pivot
-def partition(arr,low,high):
-    i = ( low-1 )         # index of smaller element
-    pivot = arr[high]     # pivot
- 
-    for j in range(low , high):
- 
+def partition(a,low,high):
+    i = low -1
+    pivot = a[high]
+    for j in range(low , high+1):
+  
         # If current element is smaller than or
         # equal to pivot
         if   arr[j] <= pivot:
-         
+          
             # increment index of smaller element
             i = i+1
-            arr[i],arr[j] = arr[j],arr[i]
- 
-    arr[i+1],arr[high] = arr[high],arr[i+1]
-    return ( i+1 )
- 
+            if j>i:
+                arr[i],arr[j] = arr[j],arr[i]
+  
+    return i
+
 # The main function that implements QuickSort
 # arr[] --> Array to be sorted,
 # low  --> Starting index,
@@ -85,3 +85,13 @@ def quickSortIterative(arr,l,h):
             stack[top] = p + 1
             top = top + 1
             stack[top] = h
+
+arr=[]
+for x in range(10):
+    value = randint(0,20)
+    arr.append(value)   
+#arr = [x for x in range(100)]
+#arr=[1,2,3,7,5,6,7,8,9,10]
+print arr
+quickSort(arr,0,len(arr)-1)
+print arr
