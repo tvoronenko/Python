@@ -59,7 +59,7 @@ for x in range(10):
     arr.append(value)   
 #arr = [x for x in range(100)]
 #arr=[1,2,3,7,5,6,7,8,9,10]
-print arr
+print(arr)
 merge_sort(arr)
-print arr
+print(arr)
 

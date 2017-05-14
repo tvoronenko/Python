@@ -1,9 +1,4 @@
 
-# coding: utf-8
-
-# In[41]:
-
-#recursive
 def binary_search2(arr,ele):
     len_arr = len(arr)
     #Base case 
@@ -11,7 +6,7 @@ def binary_search2(arr,ele):
         return False
     
         
-    middle = len_arr/2
+    middle = int(len_arr/2)
     if arr[middle]==ele:
         return True
     else:
@@ -29,7 +24,7 @@ def binary_search(arr,ele):
         return False
     
     while first <= last and first > -1 and last < len_arr:
-        middle = (first + (last - first)/2)
+        middle = int((first + (last - first)/2))
         if arr[middle]==ele:
             return True
         else:
@@ -38,25 +33,6 @@ def binary_search(arr,ele):
             else:
                 first = middle + 1
     return False
-
-
-# In[42]:
-
-# list must already be sorted!
 arr = [1,2,3,4,5,6,7,8,9,10]
-
-
-# In[43]:
-
 binary_search(arr,4)
-
-
-# In[44]:
-
-binary_search(arr,2.2)
-
-
-# In[ ]:
-
-
-
+binary_search2(arr,2.2)
