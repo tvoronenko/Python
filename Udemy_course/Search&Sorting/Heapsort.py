@@ -3,47 +3,48 @@ from random import  randint
 def heapify(a, size):
     #latest element i, let's find its parent
     end= size -1
-    start = (end - 1)//2
+    parent = int((end - 1)//2)
     
-    while start >=0:
-        sift_down(a,start,size - 1)
-        start = start - 1
-
+    while parent >=0:
+        
+        sift_down(a,parent,size - 1)
+        parent = parent - 1
+def min_child(a,i,size):
+    if (2*i+2)> size:
+        return (2*i+1)
+    else:
+        if a[2*i+2]>a[2*i+1]:
+            return (2*i+2)
+        else:
+            return (2*i+1)
+        
 def sift_down(a, start, end):
     root = start
-    i_left = 2*root + 1
-    i_right = 2*root + 2
     
-    while i_left <=end:
-        child =  2*root + 1
-        swap = root
-        if a[swap] < a[child]:
-            swap = child
-        if (child +1) <= end and a[swap]<a[child+1]:
-            swap = child + 1
-        if swap  == root:
-            return
-        else:
-            a[root],a[swap] = a[swap], a[root]
-            root=swap
-#move up bigger element    
-#def move_up(i):
-#    if
-#move down smaller
-#def move_up(a,i,size):
-  # # parent = (i-1)//2
-  #  while (i > 0 and )
-def move_down(a, i,size):
-    if (2*i +1)< size:
-        if a[i]< a[2*i +1]:
-           a[i],a[2*i +1] = a[2*i +1], a[i]
-           move_down(a,(2*i +1),size)
+    while (2*root + 1) <=end:
+        mc = min_child(a,root,end)
+        if a[root]< a[mc]:
+            a[root],a[mc] = a[mc], a[root]
+        root = mc
+
+def heapsort(a):
+    n=len(a)
+    heapify(arr,n)
+    print(arr)
+     # One by one extract elements
+    end = n-1
+    while end >0:
+        #move max to end and reheap array
+        arr[end], arr[0] = arr[0], arr[end]
+        end = end - 1
+        sift_down(arr, 0,end)
+
 arr=[]
 for x in range(10):
     value = randint(0,20)
     arr.append(value)   
 #arr = [x for x in range(100)]
 #arr=[1,2,3,7,5,6,7,8,9,10]
-print arr
-heapify(arr,len(arr))
-print arr
+print(arr)
+heapsort(arr)
+print(arr)
