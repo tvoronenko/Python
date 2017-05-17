@@ -16,13 +16,10 @@ def lcs(X, Y, m, n):
            # if i == 0 or j == 0:
             #    L[i][j] = 0
            # el
-            print "i={}, j={}".format(i,j)
             if X[i-1] == Y[j-1]:
-                print "Equal L[i][j] = L[i-1][j-1] + 1 - {}+1".format(L[i-1][j-1])
                 L[i][j] = L[i-1][j-1] + 1
             else:
                 L[i][j] = max(L[i-1][j], L[i][j-1])
-                print "Not equal , max(L[i-1][j], L[i][j-1]) - max({},{})".format(L[i-1][j], L[i][j-1])
  
     # Following code is used to print LCS
     index = L[m][n]
@@ -34,28 +31,31 @@ def lcs(X, Y, m, n):
     # one by one store characters in lcs[]
     i = m
     j = n
-    while i > 0 and j > 0:
- 
-        # If current character in X[] and Y are same, then
-        # current character is part of LCS
-        if X[i-1] == Y[j-1]:
-            lcs[index-1] = X[i-1]
-            i-=1
-            j-=1
-            index-=1
- 
-        # If not same, then find the larger of two and
-        # go in the direction of larger value
-        elif L[i-1][j] > L[i][j-1]:
-            i-=1
-        else:
-            j-=1
- 
-    print "LCS of " + X + " and " + Y + " is " + "".join(lcs) 
- 
+    if len(lcs)!=len(Y):
+        print "Not match"
+    else:
+        while i > 0 and j > 0:
+        
+            # If current character in X[] and Y are same, then
+            # current character is part of LCS
+            if X[i-1] == Y[j-1]:
+                lcs[index-1] = X[i-1]
+                i-=1
+                j-=1
+                index-=1
+        
+            # If not same, then find the larger of two and
+            # go in the direction of larger value
+            elif L[i-1][j] > L[i][j-1]:
+                i-=1
+            else:
+                j-=1
+        
+        print "LCS of " + X + " and " + Y + " is " + "".join(lcs) 
 
+
+Y = "CBDB"
 X = "ABCBDAB"
-Y = "BDCABA"
 m = len(X)
 n = len(Y)
 lcs(X, Y, m, n)
