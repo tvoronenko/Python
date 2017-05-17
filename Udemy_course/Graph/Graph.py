@@ -51,12 +51,21 @@ class Graph:
     def __iter__(self):
         return iter(self.vertList.values())
 
-def dfs(graph, start, visited=None):
+def dfs_rec(graph, start, visited=None):
     if visited is None:
         visited = set()
     visited.add(start)
     for nxt in graph[start] - visited:
-        dfs(graph, nxt, visited)
+        dfs_rec(graph, nxt, visited)
+    return visited
+
+def dfs(graph, start):
+    visited, stack = set(), [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            stack.extend(graph[vertex] - visited)
     return visited
 
 def dfs_paths(graph, start, goal):
@@ -68,7 +77,34 @@ def dfs_paths(graph, start, goal):
                 yield path + [nxt]
             else:
                 stack.append((nxt, path + [nxt]))
-                        
+                
+def bfs(graph, start):
+    visited, queue = set(), [start]
+    while queue:
+        vertex = queue.pop(0)
+        if vertex not in visited:
+            visited.add(vertex)
+            queue.extend(graph[vertex] - visited)
+    return visited
+
+                       
+def bfs_paths(graph, start, goal):
+    queue = [(start, [start])]
+    while queue:
+        (vertex, path) = queue.pop(0)
+        for next in graph[vertex] - set(path):
+            if next == goal:
+                yield path + [next]
+            else:
+                queue.append((next, path + [next]))
+
+def shortest_path(graph, start, goal):
+    try:
+        return next(bfs_paths(graph, start, goal))
+    except StopIteration:
+        return None
+
+
 # g = Graph()
 # for i in range(6):
 #     g.addVertex(i)
@@ -81,36 +117,42 @@ def dfs_paths(graph, start, goal):
 # g.addEdge(4,0,1)
 # g.addEdge(5,4,8)
 # g.addEdge(5,2,1)
+ 
+graph = {'A': set(['B', 'S']),
+         'B':set([]),
+         'S': set(['G', 'C']),
+         'C': set(['H', 'F']),
+         'G': set(['D','E','F']),
+         'H': set(['E']),
+         'E':set([]),
+         'D':set([]),
+         'F': set(['E'])}
+print(dfs(graph, 'A'))
+print(dfs_rec(graph, 'A'))
+print(list(dfs_paths(graph, 'A', 'F')))
+print(bfs(graph, 'A') )
+print(list(bfs_paths(graph, 'A', 'F')))
+print(shortest_path(graph, 'A', 'F'))
+# d = {}
+# g = Graph()
 # 
-# graph = {'A': set(['B', 'C']),
-#          'B': set(['A', 'D', 'E']),
-#          'C': set(['A', 'F']),
-#          'D': set(['B']),
-#          'E': set(['B', 'F']),
-#          'F': set(['C', 'E'])}
-# print(dfs(graph, 'A'))
-# print(list(dfs_paths(graph, 'A', 'F')))
-
-d = {}
-g = Graph()
-
-wfile = open('words.txt','r')
-# create buckets of words that differ by one letter
-for line in wfile:
-    print line
-    word = line[:-1]
-    print word
-    for i in range(len(word)):
-        bucket = word[:i] + '_' + word[i+1:]
-        if bucket in d:
-            d[bucket].append(word)
-        else:
-            d[bucket] = [word]
-# add vertices and edges for words in the same bucket
-for bucket in d.keys():
-    for word1 in d[bucket]:
-        for word2 in d[bucket]:
-            if word1 != word2:
-                g.addEdge(word1,word2)
-
-print(g)
+# wfile = open('words.txt','r')
+# # create buckets of words that differ by one letter
+# for line in wfile:
+#     print line
+#     word = line[:-1]
+#     print word
+#     for i in range(len(word)):
+#         bucket = word[:i] + '_' + word[i+1:]
+#         if bucket in d:
+#             d[bucket].append(word)
+#         else:
+#             d[bucket] = [word]
+# # add vertices and edges for words in the same bucket
+# for bucket in d.keys():
+#     for word1 in d[bucket]:
+#         for word2 in d[bucket]:
+#             if word1 != word2:
+#                 g.addEdge(word1,word2)
+# 
+# print(g)

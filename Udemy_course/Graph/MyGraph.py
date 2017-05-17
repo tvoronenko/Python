@@ -1,19 +1,11 @@
 from collections import deque
-from enum import Enum  
 
-class State(Enum):
-    unvisited = 1 #White
-    visited = 2 #Black
-    visiting = 3 #Gray
-    
 class Vertex:
-    def __init__(self, data, distance=0, visited = False, visit_state=State.unvisited):
+    def __init__(self, data, distance=0, visited = False):
         self.data = data
         self.distance = distance
         self.out_degree =  {}
         self.visited =  visited
-        #for knight tour
-        self.visit_state = State.unvisited
     
     def add_edge(self,edge):
          self.out_degree[edge.end] = edge
@@ -175,20 +167,20 @@ class Graph:
 #                 found = _dfs_recurs(neibr, end,parentMap)
 #         return found
     
-# g=Graph()
-# g.add_edge('A','B')
-# g.add_edge('A','S')
-# g.add_edge('S','G')
-# g.add_edge('S','C')
-# g.add_edge('G','D')
-# g.add_edge('G','E')
-# g.add_edge('G','F')
-# g.add_edge('C','F')
-# g.add_edge('C','H')
-# g.add_edge('H','E')
-# g.add_edge('F','E')
-# print(g.__str__())
-# print(g.bfs('A','E'))
-# print(g.dfs('A','E'))
-# print(list(g.dfs_all_path('A','E')))
+g=Graph()
+g.add_edge('A','B')
+g.add_edge('A','S')
+g.add_edge('S','G')
+g.add_edge('S','C')
+g.add_edge('G','D')
+g.add_edge('G','E')
+g.add_edge('G','F')
+g.add_edge('C','F')
+g.add_edge('C','H')
+g.add_edge('H','E')
+g.add_edge('F','E')
+print(g.__str__())
+print(g.bfs('A','E'))
+print(g.dfs('A','E'))
+print(list(g.dfs_all_path('A','E')))
 
