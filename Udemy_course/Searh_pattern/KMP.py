@@ -9,7 +9,7 @@ def KMPSearch(pat, txt):
  
     # Preprocess the pattern (calculate lps[] array)
     computeLPSArray(pat, M, lps)
- 
+    found = False
     i = 0 # index for txt[]
     while i < N:
         if pat[j] == txt[i]:
@@ -17,7 +17,8 @@ def KMPSearch(pat, txt):
             j += 1
  
         if j == M:
-            print "Found pattern at index " + str(i-j)
+            print("Found pattern at index " + str(i-j))
+            found = True
             j = lps[j-1]
  
         # mismatch after j matches
@@ -28,6 +29,8 @@ def KMPSearch(pat, txt):
                 j = lps[j-1]
             else:
                 i += 1
+    if not found:
+        print("Found pattern at index -1")
  
 def computeLPSArray(pat, M, lps):
     len = 0 # length of the previous longest prefix suffix
@@ -52,46 +55,8 @@ def computeLPSArray(pat, M, lps):
             else:
                 lps[i] = 0
                 i += 1
-def build_table(W):
-    pos = 1
-    cnd = 0
-    T=[0 for x in W]
-    T[0]=-1
-    while pos < len(W):
-        if W[pos] == W[cnd]:
-            T[pos] = T[cnd]
-            pos+=1
-            cnd+=1
-        else:
-            T[pos] = cnd
-            cnd=T[cnd]
-            while cnd >= 0 and W[pos] != W[cnd]:
-                cnd = T[cnd]
-            pos +=1
-            cnd +=1
-    #T[pos] = cnd
-    return T 
-def KMP(W,S):
-    m=0
-    i=0
-    T=build_table(S)
-    while m+i < len(S):
-        if W[i] == S[m+i]:
-            i+=1
-            if i == len(W):
-                return m
-                m = m + i - T[i]
-                i = T[i]
-            else:
-                if T[i] > -1 :
-                    m = m +i -T[i]
-                    i=T[i]
-                else:
-                    m = m + i +1
-                    i=0
-    return -1
-                    
-txt = "ABC ABCDAB ABCDABCDABDE"
-pat = "ABCDABD"
-# print(KMP(pat, txt))
+
+                       
+txt = "AABAACAADAABAABAA"
+pat = "AABAA"
 KMPSearch(pat, txt)
