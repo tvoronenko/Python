@@ -1,3 +1,4 @@
+from Queue import PriorityQueue
 class Vertex:
     def __init__(self,key):
         self.id = key
@@ -103,7 +104,6 @@ def shortest_path(graph, start, goal):
         return next(bfs_paths(graph, start, goal))
     except StopIteration:
         return None
-
 
 # g = Graph()
 # for i in range(6):
