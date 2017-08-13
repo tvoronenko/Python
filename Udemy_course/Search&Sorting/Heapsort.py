@@ -9,7 +9,7 @@ def heapify(a, size):
         
         sift_down(a,parent,size - 1)
         parent = parent - 1
-def min_child(a,i,size):
+def max_child(a,i,size):
     if (2*i+2)> size:
         return (2*i+1)
     else:
@@ -22,7 +22,7 @@ def sift_down(a, start, end):
     root = start
     
     while (2*root + 1) <=end:
-        mc = min_child(a,root,end)
+        mc = max_child(a,root,end)
         if a[root]< a[mc]:
             a[root],a[mc] = a[mc], a[root]
         root = mc

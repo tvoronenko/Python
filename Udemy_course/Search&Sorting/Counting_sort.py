@@ -3,7 +3,8 @@ from random import  randint
 from _collections import defaultdict
  
 def solution(unsorted_prices,max_price):
-    
+   
+    output = [0 for x in range(max_price+1)]
     # list of 0s at indices 0 to max_price
     prices_to_counts = [0 for x in range(max_price+1)]
     
@@ -11,16 +12,13 @@ def solution(unsorted_prices,max_price):
     for price in unsorted_prices:
         prices_to_counts[price] +=1
         
-    # For each price in prices_to_counts
-    k=0
-    for price,count in enumerate(prices_to_counts):
+    for i in range(max_price+1):
+        prices_to_counts[i] += prices_to_counts[i-1]
         
-            # for the number of times the element occurs
-        for time in range(count):
-            
-            # add it to the sorted price list
-            unsorted_prices[k]=price
-            k+=1
+     # Build the output character array
+    for i in range(len(unsorted_prices)):
+        output[prices_to_counts[arr[i]]-1] = arr[i]
+        prices_to_counts[arr[i]] -= 1
                 
     return unsorted_prices 
 

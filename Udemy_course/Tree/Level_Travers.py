@@ -5,10 +5,10 @@
 
 import collections
 class Node:
-    def __init__(self, val):
+    def __init__(self, val=None):
         self.left = None
         self.right = None
-        self.val =  val
+        self.val =  val 
 def levelOrderPrint(tree):
     if not tree:
         return
